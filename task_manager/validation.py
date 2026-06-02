@@ -1,17 +1,11 @@
 def validate_task_name(task_name):
-    """
-    Validate task name input.
-    """
-    if not task_name.strip():
+    if len(task_name) == 0:
         print("Error: Task name cannot be empty.")
         return False
     return True
 
 
 def validate_task_index(index, tasks):
-    """
-    Validate task number entered by user.
-    """
     try:
         index = int(index)
 
