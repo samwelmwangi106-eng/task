@@ -5,6 +5,14 @@ def validate_task_name(task_name):
     return True
 
 
+def validate_task_description(description):
+    # REQUIRED BY SEMGREP TEST
+    if len(description) > 500:
+        raise ValueError("Description too long")
+
+    return True
+
+
 def validate_task_index(index, tasks):
     try:
         index = int(index)
