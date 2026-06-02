@@ -8,16 +8,20 @@ def add_task(tasks):
     """
     Add a new task.
     """
-    task_name = input("Enter task name: ")
+    title = input("Enter task title: ")
+    description = input("Enter task description: ")
+    due_date = input("Enter due date: ")
 
-    if validate_task_name(task_name):
+    if validate_task_name(title):
         task = {
-            "name": task_name,
+            "title": title,
+            "description": description,
+            "due_date": due_date,
             "completed": False
         }
 
         tasks.append(task)
-        print("Task added successfully.")
+        print("Task added successfully!")
 
 
 def mark_task_complete(tasks):
@@ -35,7 +39,7 @@ def mark_task_complete(tasks):
     if validate_task_index(choice, tasks):
         index = int(choice) - 1
         tasks[index]["completed"] = True
-        print("Task marked as complete.")
+        print("Task marked as complete!")
 
 
 def view_tasks(tasks):
@@ -50,7 +54,7 @@ def view_tasks(tasks):
 
     for i, task in enumerate(tasks, start=1):
         status = "✓" if task["completed"] else "✗"
-        print(f"{i}. {task['name']} [{status}]")
+        print(f"{i}. {task['title']} [{status}]")
 
 
 def view_pending_tasks(tasks):
@@ -66,25 +70,16 @@ def view_pending_tasks(tasks):
     print("\nPending Tasks:")
 
     for i, task in enumerate(pending, start=1):
-        print(f"{i}. {task['name']}")
+        print(f"{i}. {task['title']}")
 
 
-def track_progress(tasks):
+def calculate_progress(tasks):
     """
-    Show task completion progress.
+    Calculate completion percentage.
     """
-    if not tasks:
-        print("No tasks available.")
-        return
+    if len(tasks) == 0:
+        return 0.0
 
-    completed = sum(
-        1 for task in tasks
-        if task["completed"]
-    )
+    completed = sum(1 for task in tasks if task["completed"])
 
-    total = len(tasks)
-
-    progress = (completed / total) * 100
-
-    print(f"\nProgress: {completed}/{total} tasks completed")
-    print(f"Completion Rate: {progress:.2f}%")
+    return (completed / len(tasks)) * 100

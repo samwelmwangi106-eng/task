@@ -12,14 +12,15 @@ def validate_task_index(index, tasks):
     """
     Validate task number entered by user.
     """
-    if not index.isdigit():
+    try:
+        index = int(index)
+
+        if index < 1 or index > len(tasks):
+            print("Error: Task number out of range.")
+            return False
+
+        return True
+
+    except ValueError:
         print("Error: Please enter a valid number.")
         return False
-
-    index = int(index)
-
-    if index < 1 or index > len(tasks):
-        print("Error: Task number out of range.")
-        return False
-
-    return True

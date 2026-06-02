@@ -3,9 +3,8 @@ from task_manager.task_utils import (
     mark_task_complete,
     view_tasks,
     view_pending_tasks,
-    track_progress
+    calculate_progress
 )
-
 
 tasks = []
 
@@ -23,7 +22,10 @@ def display_menu():
 while True:
     display_menu()
 
-    choice = input("Enter your choice: ")
+    try:
+        choice = input("Enter your choice: ")
+    except EOFError:
+        break
 
     if choice == "1":
         add_task(tasks)
@@ -38,7 +40,7 @@ while True:
         view_pending_tasks(tasks)
 
     elif choice == "5":
-        track_progress(tasks)
+        print(calculate_progress(tasks))
 
     elif choice == "6":
         print("Exiting Task Manager...")
